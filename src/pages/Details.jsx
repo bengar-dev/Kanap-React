@@ -55,7 +55,7 @@ function Details() {
   }
 
   return (
-    <div className='pt-28 pb-6 h-screen flex flex-col items-center w-full bg-sky-400'>
+    <div className='pt-28 pb-6 h-max flex flex-col items-center w-full bg-sky-400'>
       <div className='w-9/12 flex flex-col items-center'>
         <h1 className='mt-6 text-6xl font-bold text-white'>Produit </h1>
         {product.map(details =>

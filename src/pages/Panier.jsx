@@ -22,6 +22,7 @@ function Cart() {
   const navigate = useNavigate()
 
   let getCart = JSON.parse(localStorage.getItem('cart'))
+  let total = 0
 
   async function repGetproducts() {
     const result = await getItems()
@@ -149,6 +150,22 @@ function Cart() {
     }
   }
 
+  function totalPrice() {
+    for(let i = 0; i < getCart.length; i ++) {
+      let findProduct = products.find(p => p._id === getCart[i].id)
+      total += findProduct.price * getCart[i].qty
+    }
+    return total
+  }
+
+  function totalProducts() {
+    let totalItems = 0
+    for (let i = 0; i < getCart.length; i++) {
+      totalItems += +getCart[i].qty
+    }
+    return totalItems
+  }
+
   return (
     <div className='pt-28 pb-6 flex flex-col items-center w-full bg-sky-400'>
       <div className='w-9/12 flex flex-col items-center'>
@@ -158,6 +175,9 @@ function Cart() {
             {foundProduct(product.id, product.color, product.qty)}
           </div>
         ) : ''}
+        <div className='w-full h-10 border-b border-sky-800 flex justify-end'>
+          <p className=''>Total : <span className='font-medium'>{totalPrice()}</span> € <span className='text-sm'>( {totalProducts()} articles )</span> </p>
+        </div>
         <div className='w-full flex flex-col items-center'>
           <h2 className='font-bold text-xl text-white'>Commander</h2>
           <form className='flex flex-col w-9/12'>
